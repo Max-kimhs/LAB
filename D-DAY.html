@@ -13,3 +13,63 @@
     }
     h1 {
       font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .time-box {
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      min-width: 100px;
+    }
+    .time-box span {
+      display: block;
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 2025년 10월 25일까지 남은 시간 🎉</h1>
+  <div id="countdown">
+    <div class="time-box"><div id="days">0</div><span>Days</span></div>
+    <div class="time-box"><div id="hours">0</div><span>Hours</span></div>
+    <div class="time-box"><div id="minutes">0</div><span>Minutes</span></div>
+    <div class="time-box"><div id="seconds">0</div><span>Seconds</span></div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const targetDate = new Date('2025-10-25T00:00:00');
+
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "🎉 D-DAY 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // 처음 실행 + 1초마다 업데이트
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
